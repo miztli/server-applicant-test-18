@@ -40,3 +40,16 @@ values
  (8,
  'aced0005737200226f72672e737072696e676672616d65776f726b2e646174612e67656f2e506f696e7431b9e90ef11a4006020002440001784400017978704023000000000000404bfa1cac083127', now(), now(), false, 'ONLINE',
 'driver08pw', 'driver08');
+
+-- Create 3 manufacturers
+insert into manufacturer (id, date_created, name, description) values (1, now(), 'BMW', 'The best sports cars manufacturer');
+insert into manufacturer (id, date_created, name, description) values (2, now(), 'VW', 'The best car city cars manufacturer');
+insert into manufacturer (id, date_created, name, description) values (3, now(), 'AUDI', 'The best design manufacturer');
+
+-- Create 3 cars
+insert into car (id, date_created, license_plate, seat_count, convertible, engine_type, entity_manufacturer_id)
+values (1, now(), 'NCA-3432', 4, true, 'ELECTRIC', 1);
+insert into car (id, date_created, license_plate, seat_count, convertible, engine_type, entity_manufacturer_id)
+values (2, now(), 'AD-43422', 2, true, 'GAS', 2);
+insert into car (id, date_created, license_plate, seat_count, convertible, engine_type, entity_manufacturer_id)
+values (3, now(), '3432DADA', 5, false, 'HYBRID', 3);
