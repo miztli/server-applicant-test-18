@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class CarMapper {
     public static CarDO makeCarDO(CarDTO carDTO)
     {
-        return new CarDO(carDTO.getLicensePlate(), carDTO.getSeatCount(), carDTO.getConvertible(), carDTO.getEngineType());
+        return new CarDO(carDTO.getLicensePlate(), carDTO.getSeatCount(), carDTO.getConvertible(), carDTO.getRating() , carDTO.getEngineType());
     }
 
 

@@ -30,6 +30,9 @@ public class CarDO {
     @Column
     private Boolean convertible;
 
+    @Column
+    private Integer rating;
+
     @Enumerated(EnumType.STRING)
     @Column
     private EngineType engineType;
@@ -38,13 +41,21 @@ public class CarDO {
     @JoinColumn(name = "entity_manufacturer_id")
     private ManufacturerDO manufacturerDO;
 
+    @OneToOne(mappedBy = "carDO", fetch = FetchType.LAZY)
+    private DriverDO driverDO;
+
     public CarDO() {
     }
 
-    public CarDO(String licensePlate, Integer seatCount, Boolean convertible, EngineType engineType) {
+    public CarDO(Long id) {
+        this.id = id;
+    }
+
+    public CarDO(String licensePlate, Integer seatCount, Boolean convertible, Integer rating, EngineType engineType) {
         this.licensePlate = licensePlate;
         this.seatCount = seatCount;
         this.convertible = convertible;
+        this.rating = rating;
         this.engineType = engineType;
 //        this.manufacturerDO = manufacturerDO;
     }
@@ -89,6 +100,14 @@ public class CarDO {
         this.convertible = convertible;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
     public EngineType getEngineType() {
         return engineType;
     }
@@ -105,5 +124,11 @@ public class CarDO {
         this.manufacturerDO = manufacturerDO;
     }
 
+    public DriverDO getDriverDO() {
+        return driverDO;
+    }
 
+    public void setDriverDO(DriverDO driverDO) {
+        this.driverDO = driverDO;
+    }
 }

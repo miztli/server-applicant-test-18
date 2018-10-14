@@ -21,6 +21,8 @@ public class CarDTO {
 
     private Boolean convertible;
 
+    private Integer rating;
+
     private EngineType engineType;
 
 //    private ManufacturerDO entityManufacturerDO;
@@ -29,11 +31,12 @@ public class CarDTO {
     private CarDTO() {
     }
 
-    private CarDTO(Long id, String licensePlate, Integer seatCount, Boolean convertible, EngineType engineType) {
+    private CarDTO(Long id, String licensePlate, Integer seatCount, Boolean convertible, Integer rating, EngineType engineType) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.seatCount = seatCount;
         this.convertible = convertible;
+        this.rating = rating;
         this.engineType = engineType;
     }
 
@@ -54,6 +57,10 @@ public class CarDTO {
         return convertible;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
     public EngineType getEngineType() {
         return engineType;
     }
@@ -65,6 +72,7 @@ public class CarDTO {
         private String licensePlate;
         private Integer seatCount;
         private Boolean convertible;
+        private Integer rating;
         private EngineType engineType;
 
         public CarDTOBuilder setId(Long id) {
@@ -87,13 +95,18 @@ public class CarDTO {
             return this;
         }
 
+        public CarDTOBuilder setRating(Integer rating) {
+            this.rating = rating;
+            return this;
+        }
+
         public CarDTOBuilder setEngineType(EngineType engineType) {
             this.engineType = engineType;
             return this;
         }
 
         public CarDTO createCarDTO() {
-            return new CarDTO(id, licensePlate, seatCount, convertible, engineType);
+            return new CarDTO(id, licensePlate, seatCount, convertible, rating, engineType);
         }
     }
 }

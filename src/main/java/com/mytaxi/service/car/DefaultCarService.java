@@ -1,7 +1,9 @@
 package com.mytaxi.service.car;
 
 import com.mytaxi.dataaccessobject.CarRepository;
+import com.mytaxi.dataaccessobject.specifications.CarSpecifications;
 import com.mytaxi.domainobject.CarDO;
+import com.mytaxi.domainobject.DriverDO;
 import com.mytaxi.domainobject.ManufacturerDO;
 import com.mytaxi.exception.ConstraintsViolationException;
 import com.mytaxi.exception.EntityNotFoundException;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultCarService extends AbstractService<CarDO, Long> implements CarService {
@@ -40,8 +43,9 @@ public class DefaultCarService extends AbstractService<CarDO, Long> implements C
     }
 
     @Override
-    public ManufacturerDO findCarManufacturer(Long id) throws EntityNotFoundException {
-        return findById(id).getManufacturerDO(); //use abstract method to access exception
+    @Transactional(readOnly = true)
+    public CarDO findByDriverId(long driverId) throws EntityNotFoundException {
+        return super.findOne(CarSpecifications.findByAssignedDriver(driverId));
     }
 
     @Override
@@ -60,7 +64,7 @@ public class DefaultCarService extends AbstractService<CarDO, Long> implements C
     }
 
     @Override
-    protected JpaSpecificationExecutor<CarDO> getTJpaSpecificationExecutor() {
+    protected JpaSpecificationExecutor<CarDO> getJpaSpecificationExecutor() {
         return carRepository;
     }
 }

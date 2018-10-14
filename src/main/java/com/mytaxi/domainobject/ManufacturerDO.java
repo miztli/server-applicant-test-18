@@ -28,7 +28,7 @@ public class ManufacturerDO {
     @NotNull(message = "Description can not be null!")
     String description;
 
-    @OneToMany(mappedBy = "manufacturerDO")
+    @OneToMany(mappedBy = "manufacturerDO", fetch = FetchType.LAZY)
     List<CarDO> cars = new ArrayList<>();
 
     public Long getId() {

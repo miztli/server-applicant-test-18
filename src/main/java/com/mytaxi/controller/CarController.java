@@ -8,6 +8,7 @@ import com.mytaxi.domainobject.CarDO;
 import com.mytaxi.exception.ConstraintsViolationException;
 import com.mytaxi.exception.EntityNotFoundException;
 import com.mytaxi.service.car.CarService;
+import com.mytaxi.service.manufacturer.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,12 @@ import java.util.List;
 public class CarController {
 
     private final CarService carService;
+    private final ManufacturerService manufacturerService;
 
-    @Autowired
-    public CarController(final CarService carService) {
+     @Autowired
+    public CarController(CarService carService, ManufacturerService manufacturerService) {
         this.carService = carService;
+        this.manufacturerService = manufacturerService;
     }
 
     //Car mappings
@@ -63,7 +66,7 @@ public class CarController {
     @GetMapping("/{carId}/manufacturer")
     public ManufacturerDTO getCarManufacturer(@PathVariable long carId) throws EntityNotFoundException
     {
-        return ManufacturerMapper.makeManufacturerDTO(carService.findCarManufacturer(carId));
+        return ManufacturerMapper.makeManufacturerDTO(manufacturerService.findCarManufacturer(carId));
     }
 
 
