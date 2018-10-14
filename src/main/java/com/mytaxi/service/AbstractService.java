@@ -3,12 +3,14 @@ package com.mytaxi.service;
 import com.mytaxi.exception.ConstraintsViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This abstracts class helps us to implement all basic CRUD methods
@@ -30,9 +32,28 @@ public abstract class AbstractService<T, ID> {
                     .orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + id));
     }
 
+    protected T findOne(Specification<T> spec) {
+        return getJpaSpecificationExecutor()
+                .findOne(spec)
+                .orElseThrow(() -> new EntityNotFoundException("Could not find entity with provided specification"));
+    }
+
+    /**
+     * Find all T entities
+     * @return The list of found T entities
+     */
     protected List<T> findAll() {
         return getJpaRepository().findAll();
+    }
 
+    /**
+     * Find all T entities
+     * @return The list of found T entities
+     */
+    protected List<T> findAll(Specification<T> spec) {
+        List<T> resultList = getJpaSpecificationExecutor().findAll(spec);
+        if (resultList.isEmpty()) { throw new EntityNotFoundException("Could not find results with the provided specification"); }
+        return resultList;
     }
 
     protected T save(T entity) throws ConstraintsViolationException {
@@ -58,5 +79,5 @@ public abstract class AbstractService<T, ID> {
     }
 
     protected abstract JpaRepository<T, ID> getJpaRepository();
-    protected abstract JpaSpecificationExecutor<T> getTJpaSpecificationExecutor(); //Use it for Pageables
+    protected abstract JpaSpecificationExecutor<T> getJpaSpecificationExecutor(); //Use it for Pageables
 }
