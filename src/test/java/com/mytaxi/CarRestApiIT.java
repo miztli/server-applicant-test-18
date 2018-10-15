@@ -1,4 +1,5 @@
 package com.mytaxi;
 
-public class CarRestApiIT {
+public class CarRestApiIT
+{
 }
