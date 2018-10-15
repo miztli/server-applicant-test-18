@@ -136,10 +136,21 @@ public class DriverController
         driverService.updateDriverPartially(driverId, fields); //not implemented, yet
     }
 
-    @GetMapping
+    @RequestMapping(
+            params = {"onlineStatus"},
+            method = RequestMethod.GET
+    )
     public List<DriverDTO> findDrivers(@RequestParam OnlineStatus onlineStatus)
     {
         return DriverMapper.makeDriverDTOList(driverService.find(onlineStatus));
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET
+    )
+    public List<DriverDTO> findAllDrivers()
+    {
+        return DriverMapper.makeDriverDTOList(driverService.findAll());
     }
 
     /**
