@@ -188,6 +188,11 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
         return driverRepository.findByOnlineStatus(onlineStatus);
     }
 
+    @Override
+    public List<DriverDO> findAll() {
+        return super.findAll();
+    }
+
     /**
      * Serch for coincidences in the DB.
      * This method is mainly designed for example purposes, any

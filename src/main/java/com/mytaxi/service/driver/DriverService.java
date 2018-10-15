@@ -16,6 +16,7 @@ public interface DriverService
     //FIND
     DriverDO find(Long driverId) throws EntityNotFoundException;
     List<DriverDO> find(OnlineStatus onlineStatus);
+    List<DriverDO> findAll();
     List<DriverDO> search(Map<String, Object> filters);
 
     //CREATE
