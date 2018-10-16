@@ -46,7 +46,7 @@ Manual REST API tests can be performed following the next resources table:
 
 | RESOURCE      | HTTP METHOD     | DESCRIPTION                     | URL                           |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS              | FAILURE             |
 | ------------- | --------------- | ------------------------------- | ----------------------------- | ----------------------------- | -------------------------------------------- | -------| -------------------- | ------------------- |
-| login         | POST            | authenticate user (30 min)      | /login                        | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+| login         | POST            | authenticate user (30 min)      | /login                        | ----------------------------- | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find all drivers                | /v1/drivers                   | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find driver by id               | /v1/drivers/{id}              | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find driver by onlineStatus     | /v1/drivers/{id}              | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
