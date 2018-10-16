@@ -17,8 +17,8 @@ JUNIT + Restassured + maven-failsafe-plugin
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
 2. Execute the following command. `mvn verify`
 3. Test reports will be generated in the following directories:
-    - ***${root}***/target/surefire-reports/surefire-reports/
-    - ***${root}***/target/surefire-reports/surefire-reports/
+    - ***${root}/target/surefire-reports/surefire-reports/***
+    - ***${root}/target/surefire-reports/surefire-reports/***
 
 *Tests source can be found in ${root}/src/test/java/com/mytaxi*
 
@@ -32,9 +32,9 @@ JUNIT + Restassured + maven-failsafe-plugin
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
 2. Execute either of the following commands. 
     
-    `java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar`
+    ```java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar```
 
-    `mvn spring-boot:run`
+    ```mvn spring-boot:run```
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 * *By default we use only JSON media types*
