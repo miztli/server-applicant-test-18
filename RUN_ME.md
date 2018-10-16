@@ -43,7 +43,7 @@ Manual REST API tests can be performed following the next resources table:
 | drivers     | POST        | create new driver               | /drivers     | -------- | ----------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
 |             |             |                                 |              |          |                   |        |              |                     |
 | drivers     | DELETE      | delete driver by id             | /drivers/{id}| -------- | ----------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-| drivers     | PUT         | update a driver's location      | /drivers/{id}| -------- | (Float) longitude | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers     | PUT         | update a driver's location      | /drivers/{id}| -------- | (Float) longitude \n(Float) longitude | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 |             |             |                                 |              |          | (Float) latitude  |        |                      |                     |
 | drivers     | PUT         | update a driver's online status | /drivers/{id}| -------- | ----------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 
