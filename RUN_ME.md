@@ -30,8 +30,11 @@ JUNIT + Restassured + maven-failsafe-plugin
 ### Running the project
 *NOTE: if you haven't compiled the project already, please, go one step back.*
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
-2. Execute the following command. `java -jar target/`
+2. Execute either of the following commands. 
+    
+    `java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar`
 
+    `mvn spring-boot:run`
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 * *By default we use only JSON media types*
