@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mytaxi.domainvalue.EngineType;
+import com.mytaxi.domainvalue.OnlineStatus;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,13 +26,15 @@ public class CarDTO {
 
     private EngineType engineType;
 
+
 //    private ManufacturerDO entityManufacturerDO;
 
 
     private CarDTO() {
     }
 
-    private CarDTO(Long id, String licensePlate, Integer seatCount, Boolean convertible, Integer rating, EngineType engineType) {
+    private CarDTO(Long id, String licensePlate, Integer seatCount, Boolean convertible,
+                   Integer rating, EngineType engineType) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.seatCount = seatCount;
