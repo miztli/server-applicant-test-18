@@ -17,8 +17,8 @@ JUNIT + Restassured + maven-failsafe-plugin
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
 2. Execute the following command. `mvn verify`
 3. Test reports will be generated in the following directories:
-    - ***${root}/target/surefire-reports/surefire-reports/***
-    - ***${root}/target/surefire-reports/surefire-reports/***
+    - ***${root}/target/surefire-reports/surefire-reports***
+    - ***${root}/target/failsafe-reports***
 
 *Tests source can be found in ${root}/src/test/java/com/mytaxi*
 
