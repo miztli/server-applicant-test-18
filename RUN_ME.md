@@ -24,7 +24,7 @@ JUNIT + Restassured + maven-failsafe-plugin
 ### Compiling the project
 1. Using your favorite shell, navigate to the root of the project ***${root}*** 
 2. Execute the following command. `mvn clean package`
-
+3. Without running tests, execute:  `mvn clean package -DskipTests`
 ### Running the project
 *NOTE: if you haven't compiled the project already, please, go one step back.*
 1. Using your favorite shell, navigate to the root of the project ***${root}*** 
