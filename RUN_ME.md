@@ -36,16 +36,30 @@ JUNIT + Restassured + maven-failsafe-plugin
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 
-| RESOURCE    | HTTP METHOD | DESCRIPTION                     | URL          |  HEADERS |  QUERY PARAMS                                | BODY   | SUCCESS      | FAILURE             |
-| ----------- | ----------- | ------------------------------- | -----------  | -------- | -------------------------------------------- | -------| ------------ | ------------------- |
-| drivers     | GET         | find all drivers                | /drivers     | -------- | -------------------------------------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
-| drivers     | GET         | find driver by id               | /drivers/{id}| -------- | -------------------------------------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
-| drivers     | POST        | create new driver               | /drivers     | -------- | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
-|             |             |                                 |              |          |                                              |                          |              |                     |
-| drivers     | DELETE      | delete driver by id             | /drivers/{id}| -------- | -------------------------------------------- | ------------------- | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-| drivers     | PUT         | update a driver's location      | /drivers/{id}| -------- | (Float) longitude={x}                        | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-|             |             |                                 |              |          | (Float) latitude={-y}                        | ------ |                      |                     |
-| drivers     | PUT         | update a driver's online status | /drivers/{id}| -------- | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| RESOURCE    | HTTP METHOD     | DESCRIPTION                     | URL                    |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS      | FAILURE             |
+| ----------- | --------------- | ------------------------------- | ---------------------- | ----------------------------- | -------------------------------------------- | -------| ------------ | ------------------- |
+| login       | POST            | Authenticate user               | /login                 | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | GET             | find all drivers                | /v1/drivers            | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | GET             | find driver by id               | /v1//drivers/{id}      | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | GET             | find driver by onlineStatus     | /v1//drivers/{id}      | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | POST            | create new driver               | /v1//drivers           | Authorization: Bearer {token} | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
+|             |                 |                                 |                        |                               |                                              |                          |              |                     |
+| drivers     | DELETE          | delete driver by id             | /v1//drivers/{id}      | Authorization: Bearer {token} | -------------------------------------------- | ------------------- | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers     | PUT             | update a driver's location      | /v1//drivers/{id}      | Authorization: Bearer {token} | (Float) longitude={x.y}                      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+|             |                 |                                 |                        |                               | (Float) latitude={-y.x}                      | ------ |                      |                     |
+| drivers     | PUT             | update a driver's online status | /v1//drivers/{id}      | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers     | PATCH           | update only necessary fields    | /v1//drivers/{id}      | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+|             | (not impl, yet) |                                 |                        |                               | (Float) longitude={x.y}                      | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (Float) latitude={-y.x}                      | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (String) username={''}                       | ------ |                      |                     |
+| drivers     | GET             | Search for a driver             | /v1//drivers/search    |                               | (String) username={''}                       | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+|             |                 |                                 |                        |                               | (String) onlineStatus={ONLINE, OFFLINE}      | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (Integer) rating={x}                         | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (String) licensePlate={''}                   | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (Integer) seatCount={x}                      | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (String) engineType={ELECTRIC,GAS,HYBRID}    | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (Boolean) convertible={true, false}          | ------ |                      |                     |
+|             |                 |                                 |                        |                               | (String) manufacturerName={}                 | ------ |                      |                     |
 
 
 ```
