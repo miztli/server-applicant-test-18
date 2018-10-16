@@ -2,8 +2,6 @@
 
 Evaluation presented by Miztli Melgoza applying for the JAVA developer position.
 
-***Author: Miztli Melgoza***
-
 ### Getting Started
 
 These instructions wil guide you through a basic project setup and will provide examples on how to execute REST API LIVE tests.
@@ -28,6 +26,7 @@ JUNIT + Restassured + maven-failsafe-plugin
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
 2. Execute the following command. `mvn clean package`
 3. Compile without running tests, execute:  `mvn clean package -DskipTests`
+
 ### Running the project
 *NOTE: if you haven't compiled the project already, please, go one step back.*
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
@@ -35,6 +34,7 @@ JUNIT + Restassured + maven-failsafe-plugin
 
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
+* *By default we use only JSON media types*
 
 | RESOURCE      | HTTP METHOD     | DESCRIPTION                     | URL                           |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS              | FAILURE             |
 | ------------- | --------------- | ------------------------------- | ----------------------------- | ----------------------------- | -------------------------------------------- | -------| -------------------- | ------------------- |
@@ -64,26 +64,21 @@ Manual REST API tests can be performed following the next resources table:
 | cars          | GET             | find car by id                  | /v1/cars/{id}                 | Authorization: Bearer {token} | -------------------------------------------- | { "licensePlate":"MEHM", "convertible":true, "rating":9, "engineType":"HYBRID"} | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | cars          | POST            | create new driver               | /v1/cars                      | Authorization: Bearer {token} | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
 | cars          | DELETE          | delete car by id                | /v1/cars/{id}                 | Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-| manufacturers | GET             | find a car's manufacturer       | /v1/cars/{carId}/manufacturer | Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| manufacturers | GET             | find a car's manufacturer       | /v1/cars/{carId}/manufacturers| Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 
-```
+## Built with
+- [Springboot](https://spring.io/projects/spring-boot)
+- [Maven](https://maven.apache.org)
+- [H2](http://www.h2database.com/html/main.html)
+- [JWT](https://github.com/jwtk/jjwt)
 
-### Http requests with httpie
+##Author
+- ***Miztli Melgoza***
 
-    CARS
-    http GET http://localhost:8080/v1/cars/4
-    http GET http://localhost:8080/v1/cars
-    http POST http://localhost:8080/v1/cars licensePlate=ABCD-232 seatCount:=4 convertible:=false engineType=GAS
-    http DELETE http://localhost:8080/v1/cars/3
+##Acknowledgments
+- It took me about 6 hours to complete the entire exercise.
+- Just a few changes were added to the pre existing code.
+- Although I could have implemented stuff as pagination, ordering, unit and integration tests with spock or a more robust authentication method, I tried to focus on the simplicity and the abstraction of the code to easily accomplish the tasks.
+- If I failed to accomplish a task either by complete or partially, please, let me know in orther to finish it.
 
-    DRIVERS
-    http GET http://localhost:8080/v1/drivers?onlineStatus=ONLINE
-    http GET http://localhost:8080/v1/drivers?onlineStatus=OFFLINE
-    http PUT http://localhost:8080/v1/drivers/1?carId=1&selected=true
-
-### Start the application
-
-    With maven plugin: mvn spring-boot:run
-    As packaged app: 
-        mvn clean package
-        java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar
+***Kind, regards.***
