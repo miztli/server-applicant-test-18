@@ -20,7 +20,7 @@ JUNIT + Restassured + maven-failsafe-plugin
     - ***${root}/target/surefire-reports***
     - ***${root}/target/failsafe-reports***
 
-*Tests source can be found in ${root}/src/test/java/com/mytaxi*
+***Tests source can be found in ${root}/src/test/java/com/mytaxi***
 
 ### Compiling the project
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
@@ -28,16 +28,19 @@ JUNIT + Restassured + maven-failsafe-plugin
 3. Compile without running tests, execute:  `mvn clean package -DskipTests`
 
 ### Running the project
-*NOTE: if you haven't compiled the project already, please, go one step back.*
+***NOTE:*** if you haven't compiled the project already, please, go one step back.*
 1. Using your favorite shell, navigate to the root of the project, to find ***${root}/pom.xml*** 
 2. Execute either of the following commands. 
     
     ```java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar```
 
     ```mvn spring-boot:run```
+    
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 * *By default we use only JSON media types*
+
+*Credentials: * ```username=miztli password=password```
 
 | RESOURCE      | HTTP METHOD     | DESCRIPTION                     | URL                           |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS              | FAILURE             |
 | ------------- | --------------- | ------------------------------- | ----------------------------- | ----------------------------- | -------------------------------------------- | -------| -------------------- | ------------------- |
@@ -50,12 +53,14 @@ Manual REST API tests can be performed following the next resources table:
 | drivers       | DELETE          | delete driver by id             | /v1/drivers/{id}              | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 | drivers       | PUT             | update a driver's location      | /v1/drivers/{id}              | Authorization: Bearer {token} | (Float) longitude={x.y}                      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 |               |                 |                                 |                               |                               | (Float) latitude={-y.x}                      | ------ |                      |                     |
-| drivers       | PUT             | update a driver's online status | /v1/drivers/{id}             | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers       | PUT             | update a driver's online status | /v1/drivers/{id}              | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers       | PUT             | select car for the driver       | /v1/drivers/{id}              | Authorization: Bearer {token} | (Integer) carId={x}                          | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+|               |                 |                                 |                               |                               | (Boolean) selected={true, false}             | ------ |                      |                     |
 | drivers       | PATCH           | update only necessary fields    | /v1/drivers/{id}              | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 |               | (not impl, yet) |                                 |                               |                               | (Float) longitude={x.y}                      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (Float) latitude={-y.x}                      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (String) username={''}                       | ------ |                      |                     |
-| drivers       | GET             | search for a driver             | /v1/drivers/search            | Authorization: Bearer {token} | (String) username={'driver'}                       | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+| drivers       | GET             | search driver by criteria       | /v1/drivers/search            | Authorization: Bearer {token} | (String) username={'driver'}                       | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 |               |                 |                                 |                               |                               | (String) onlineStatus={ONLINE, OFFLINE}      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (Integer) rating={5}                         | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (String) licensePlate={'ZAF'}                   | ------ |                      |                     |

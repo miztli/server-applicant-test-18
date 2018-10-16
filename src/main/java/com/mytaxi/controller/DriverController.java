@@ -55,12 +55,23 @@ public class DriverController
 
     // DRIVER MAPPINGS
 
+    /**
+     * Find driver by id
+     * @param driverId The driver id
+     * @throws EntityNotFoundException if no driver found
+     */
     @GetMapping("/{driverId}")
     public DriverDTO getDriver(@PathVariable long driverId) throws EntityNotFoundException
     {
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
 
+    /**
+     * Create a driver
+     * @param driverDTO the provided {@link DriverDTO}
+     * @return The {@link DriverDTO} with generated id
+     * @throws ConstraintsViolationException if db constraints were violated
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DriverDTO createDriver(@Valid @RequestBody DriverDTO driverDTO) throws ConstraintsViolationException
@@ -69,6 +80,11 @@ public class DriverController
         return DriverMapper.makeDriverDTO(driverService.create(driverDO));
     }
 
+    /**
+     * Delete driver by id
+     * @param driverId The driver id
+     * @throws EntityNotFoundException if no driver found
+     */
     @DeleteMapping("/{driverId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDriver(@PathVariable long driverId) throws EntityNotFoundException
