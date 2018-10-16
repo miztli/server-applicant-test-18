@@ -38,9 +38,11 @@ JUNIT + Restassured + maven-failsafe-plugin
     
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
-* *By default we use only JSON media types*
 
 *Credentials: * ```username=miztli password=password```
+
+* *By default we use only JSON media types*
+
 
 | RESOURCE      | HTTP METHOD     | DESCRIPTION                     | URL                           |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS              | FAILURE             |
 | ------------- | --------------- | ------------------------------- | ----------------------------- | ----------------------------- | -------------------------------------------- | -------| -------------------- | ------------------- |
