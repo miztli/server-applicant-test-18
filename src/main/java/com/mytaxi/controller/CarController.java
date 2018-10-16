@@ -50,7 +50,7 @@ public class CarController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CarDTO createDriver(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException
+    public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException
     {
         CarDO carDo = CarMapper.makeCarDO(carDTO);
         return CarMapper.makeCarDTO(carService.create(carDo));

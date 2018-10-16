@@ -23,6 +23,10 @@ public class CarMapper {
                 .setConvertible(carDO.getConvertible())
                 .setEngineType(carDO.getEngineType());
 
+                if (carDO.getRating() != null) {
+                    carDTOBuilder.setRating(carDO.getRating());
+                }
+
         return carDTOBuilder.createCarDTO();
     }
 

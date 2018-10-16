@@ -3,6 +3,7 @@ package com.mytaxi.controller;
 import com.mytaxi.controller.mapper.CarMapper;
 import com.mytaxi.controller.mapper.DriverMapper;
 import com.mytaxi.controller.utils.EngineTypeConverter;
+import com.mytaxi.controller.utils.OnlineStatusConverter;
 import com.mytaxi.dataaccessobject.specifications.FilterNames;
 import com.mytaxi.datatransferobject.CarDTO;
 import com.mytaxi.datatransferobject.DriverDTO;
@@ -49,6 +50,7 @@ public class DriverController
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(EngineType.class, new EngineTypeConverter());
+        binder.registerCustomEditor(EngineType.class, new OnlineStatusConverter());
     }
 
     // DRIVER MAPPINGS
@@ -68,6 +70,7 @@ public class DriverController
     }
 
     @DeleteMapping("/{driverId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDriver(@PathVariable long driverId) throws EntityNotFoundException
     {
         driverService.delete(driverId);
@@ -88,12 +91,34 @@ public class DriverController
             params = {"longitude", "latitude"},
             method = RequestMethod.PUT
     )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateLocation(@PathVariable long driverId,
                                @RequestParam double longitude,
                                @RequestParam double latitude)
         throws EntityNotFoundException
     {
         driverService.updateLocation(driverId, longitude, latitude);
+    }
+
+    /**
+     * Changed PutMapping annotation to have more control over
+     * url mappings, using request params to define which controller method
+     * to apply.
+     * @param driverId The driver's id
+     * @throws EntityNotFoundException if no driver found
+     */
+//    @PutMapping("/{driverId}")
+    @RequestMapping(
+            value = "/{driverId}",
+            params = {"onlineStatus"},
+            method = RequestMethod.PUT
+    )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateDriverStatus(@PathVariable long driverId,
+                                   @RequestParam OnlineStatus onlineStatus)
+        throws EntityNotFoundException
+    {
+        driverService.updateOnlineStatus(driverId, onlineStatus);
     }
 
     /**
@@ -110,6 +135,7 @@ public class DriverController
             params = {"carId", "selected"},
             method = RequestMethod.PUT
     )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDriverCarTest(@PathVariable long driverId,
                                     @RequestParam long carId,
                                     @RequestParam boolean selected)
@@ -123,12 +149,13 @@ public class DriverController
      * Typically I use patch (for convention), since only few fields of
      * the resource will be changed.
      * One great disadvantage is that validation is not done at the Controller
-     * Layer but in Service Layer.
+     * Layer but elsewhere f.e. in Service Layer.
      * @param driverId The id of the driver.
      * @param fields Only the desired fields of the {@link DriverDO} that must change.
      * @throws EntityNotFoundException If driver with provided id is not in the DB.
      */
     @PatchMapping("/{driverId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDriverPartially(
             @PathVariable long driverId, @RequestBody Map<String, Object> fields)
         throws EntityNotFoundException

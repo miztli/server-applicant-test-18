@@ -3,6 +3,8 @@ package com.mytaxi.controller.mapper;
 import com.mytaxi.datatransferobject.DriverDTO;
 import com.mytaxi.domainobject.DriverDO;
 import com.mytaxi.domainvalue.GeoCoordinate;
+import com.mytaxi.domainvalue.OnlineStatus;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +28,11 @@ public class DriverMapper
         if (coordinate != null)
         {
             driverDTOBuilder.setCoordinate(coordinate);
+        }
+        OnlineStatus onlineStatus = driverDO.getOnlineStatus();
+        if (onlineStatus != null)
+        {
+            driverDTOBuilder.setOnlineStatus(onlineStatus);
         }
 
         return driverDTOBuilder.createDriverDTO();
