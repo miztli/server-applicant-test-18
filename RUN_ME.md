@@ -41,7 +41,7 @@ Manual REST API tests can be performed following the next resources table:
 
 | RESOURCE      | HTTP METHOD     | DESCRIPTION                     | URL                           |  HEADERS                      |  QUERY PARAMS                                | BODY   | SUCCESS              | FAILURE             |
 | ------------- | --------------- | ------------------------------- | ----------------------------- | ----------------------------- | -------------------------------------------- | -------| -------------------- | ------------------- |
-| login         | POST            | authenticate user               | /login                        | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+| login         | POST            | authenticate user (30 min)      | /login                        | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find all drivers                | /v1/drivers                   | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find driver by id               | /v1/drivers/{id}              | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find driver by onlineStatus     | /v1/drivers/{id}              | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
@@ -55,14 +55,14 @@ Manual REST API tests can be performed following the next resources table:
 |               | (not impl, yet) |                                 |                               |                               | (Float) longitude={x.y}                      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (Float) latitude={-y.x}                      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (String) username={''}                       | ------ |                      |                     |
-| drivers       | GET             | search for a driver             | /v1/drivers/search            | Authorization: Bearer {token} | (String) username={''}                       | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+| drivers       | GET             | search for a driver             | /v1/drivers/search            | Authorization: Bearer {token} | (String) username={'driver'}                       | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 |               |                 |                                 |                               |                               | (String) onlineStatus={ONLINE, OFFLINE}      | ------ |                      |                     |
-|               |                 |                                 |                               |                               | (Integer) rating={x}                         | ------ |                      |                     |
-|               |                 |                                 |                               |                               | (String) licensePlate={''}                   | ------ |                      |                     |
+|               |                 |                                 |                               |                               | (Integer) rating={5}                         | ------ |                      |                     |
+|               |                 |                                 |                               |                               | (String) licensePlate={'ZAF'}                   | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (Integer) seatCount={x}                      | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (String) engineType={ELECTRIC,GAS,HYBRID}    | ------ |                      |                     |
 |               |                 |                                 |                               |                               | (Boolean) convertible={true, false}          | ------ |                      |                     |
-|               |                 |                                 |                               |                               | (String) manufacturerName={}                 | ------ |                      |                     |
+|               |                 |                                 |                               |                               | (String) manufacturerName={'BMW'}                 | ------ |                      |                     |
 | cars          | GET             | find a car assigned to a driver | /v1/drivers/{driverId}/car    | Authorization: Bearer {token} |                                              | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | cars          | GET             | find car by id                  | /v1/cars/{id}                 | Authorization: Bearer {token} | -------------------------------------------- | { "licensePlate":"MEHM", "convertible":true, "rating":9, "engineType":"HYBRID"} | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | cars          | POST            | create new driver               | /v1/cars                      | Authorization: Bearer {token} | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
@@ -81,7 +81,8 @@ Manual REST API tests can be performed following the next resources table:
 ## Acknowledgments
 - It took me about 6 - 8 hours to complete the entire exercise.
 - Just a few changes were added to the pre existing code.
+- TDD was more or less achieved due to the fact that there was already existing working code.
 - Although I could have implemented stuff as pagination, ordering, unit and integration tests with spock or a more robust authentication method, I tried to focus on the simplicity and the abstraction of the code to easily accomplish the tasks.
-- If I failed to accomplish a task either by complete or partially, please, let me know in orther to finish it.
+- If I failed to accomplish a task either completely or partially, please, let me know in orther to finish it (if possible).
 
 ***Kind, regards.***

@@ -25,7 +25,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Service to encapsulate the link between DAO and controller and to have business logic for some driver specific things.
+ * Service to encapsulate the link between DAO and controller
+ * and to have business logic for some {@link DriverDO} specific things.
  * <p/>
  */
 @Service
@@ -46,9 +47,8 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
 
 
     /**
-     * Selects a driver by id.
-     *
-     * @param driverId
+     * Find a driver by id.
+     * @param driverId The driver id.
      * @return found driver
      * @throws EntityNotFoundException if no driver with the given id was found.
      */
@@ -58,14 +58,17 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     {
         // replace with abstract method
 //        return findDriverChecked(driverId);
-        return super.findById(driverId);
+        DriverDO driverDO = super.findById(driverId);
+        if (driverDO.getDeleted()) {
+            throw new EntityNotFoundException("Driver is marked as deleted.");
+        }
+        return driverDO;
     }
 
     /**
      * Creates a new driver.
-     *
      * @param driverDO
-     * @return
+     * @return The created {@link DriverDO} with id
      * @throws ConstraintsViolationException if a driver already exists with the given username, ... .
      */
     @Override
@@ -89,7 +92,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     /**
      * Deletes an existing driver by id.
      *
-     * @param driverId
+     * @param driverId The driver id
      * @throws EntityNotFoundException if no driver with the given id was found.
      */
     @Override
@@ -108,7 +111,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
      * @param driverId The driver's id
      * @param longitude The provided latitude
      * @param latitude The provided longitude
-     * @throws EntityNotFoundException
+     * @throws EntityNotFoundException if no drivers found
      */
     @Override
     @Transactional
@@ -122,7 +125,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
      * Update a driver status.
      * @param driverId The driver's id
      * @param onlineStatus The new status
-     * @throws EntityNotFoundException
+     * @throws EntityNotFoundException if no drivers found
      */
     @Override
     @Transactional
@@ -140,10 +143,10 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
      * This method is thread-safe at application layer, if several
      * HTTP Threads should try to access at the same time, they will
      * be queued
-     * @param driverId
-     * @param carId
-     * @param selected
-     * @throws EntityNotFoundException
+     * @param driverId The driver id
+     * @param carId The car id
+     * @param selected true(select) - false(deselect)
+     * @throws EntityNotFoundException if no drivers found
      */
     @Override
     @Transactional
@@ -184,7 +187,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     /**
      * Updates a driver partially.
      * @param fields The provided field values.
-     * @throws EntityNotFoundException
+     * @throws EntityNotFoundException if no drivers found
      */
     @Override
     @Transactional
@@ -195,7 +198,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
 
     /**
      * Find all drivers by online state.
-     *
+     * @throws EntityNotFoundException if no drivers found
      * @param onlineStatus
      */
     @Override
@@ -205,22 +208,38 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
         return driverRepository.findByOnlineStatus(onlineStatus);
     }
 
+    /**
+     * Find not deleted drivers.
+     * @throws EntityNotFoundException if no drivers found
+     * @return The List of drivers.
+     */
     @Override
-    public List<DriverDO> findAll() {
-        return super.findAll();
+    public List<DriverDO> findAll() throws EntityNotFoundException {
+        return super.findAll(DriverSpecifications.findNotDeleted());
     }
 
     /**
-     * Serch for coincidences in the DB.
+     * ONLY for testing purposes.
+     * Search for coincidences in the DB.
      * This method is mainly designed for example purposes, any
      * full-text search must include DB-specific functions
      * to optimize lookups.
+     * Also, this method is not to be used in production due to
+     * the fact that it doesn't limit the results and will fill
+     * nested objects executing one query for each of them.
      * @param filters the provided filter fields
+     * @throws EntityNotFoundException if no matching drivers found by provided criteria.
      * @return The list of matching users
      */
     @Override
-    public List<DriverDO> search(Map<String, Object> filters) {
-        return super.findAll(DriverSpecifications.withFilters(filters)); // To access exception
+    public List<DriverDO> search(Map<String, Object> filters) throws EntityNotFoundException {
+        List<DriverDO> drivers = super.findAll(DriverSpecifications.withFilters(filters)); // To access exception
+        drivers.forEach(d -> {
+            //load inner entities
+            CarDO carDO = d.getCarDO();
+            if (carDO != null) { carDO.getManufacturerDO(); }
+        });
+        return drivers;
     }
 
 

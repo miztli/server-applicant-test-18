@@ -24,6 +24,15 @@ public class DriverSpecifications {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.join("carDO").get("id"), carId);
     }
 
+    /**
+     * Find a driver marked as deleted = false
+     * @return The {@link Specification}
+     */
+    public static Specification<DriverDO> findNotDeleted() {
+        return (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("deleted"), false);
+    }
+
     public static Specification<DriverDO> withFilters (final Map<String, Object> filters) {
         List<Predicate> predicates = new ArrayList<>();
 

@@ -21,6 +21,9 @@ import java.util.Date;
 
 import static com.mytaxi.util.SecurityContants.*;
 
+/**
+ * This class provides JWT Authentication
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
@@ -46,12 +49,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                         principal.getUsername(),
                                         principal.getPassword(),
                                         new ArrayList<>()));
-//            return authenticationManager
-//                        .authenticate(
-//                                new UsernamePasswordAuthenticationToken(
-//                                        "miztli",
-//                                        "password",
-//                                        new ArrayList<>()));
     }
 
     @Override

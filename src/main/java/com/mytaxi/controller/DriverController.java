@@ -50,7 +50,7 @@ public class DriverController
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(EngineType.class, new EngineTypeConverter());
-        binder.registerCustomEditor(EngineType.class, new OnlineStatusConverter());
+        binder.registerCustomEditor(OnlineStatus.class, new OnlineStatusConverter());
     }
 
     // DRIVER MAPPINGS
@@ -175,8 +175,7 @@ public class DriverController
     @RequestMapping(
             method = RequestMethod.GET
     )
-    public List<DriverDTO> findAllDrivers()
-    {
+    public List<DriverDTO> findAllDrivers() throws EntityNotFoundException {
         return DriverMapper.makeDriverDTOList(driverService.findAll());
     }
 
@@ -200,7 +199,7 @@ public class DriverController
                                                @RequestParam(required = false) EngineType engineType,
                                                @RequestParam(required = false) Boolean convertible,
                                                @RequestParam(required = false) String manufacturerName
-                                               ) {
+                                               ) throws EntityNotFoundException {
 
         Map<String, Object> filters = new HashMap<>();
             if (username != null) { filters.put(FilterNames.FIELD_USER_NAME, username); }

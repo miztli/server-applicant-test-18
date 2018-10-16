@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.builders.PathSelectors;
@@ -49,5 +50,14 @@ public class MytaxiServerApplicantTestApplication extends WebMvcConfigurerAdapte
     {
         return new ApiInfo("mytaxi Server Applicant Test Service", "This service is to check the technology knowledge of a server applicant for mytaxi.", "Version 1.0 - mw",
             "urn:tos", "career@mytaxi.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
+    }
+
+    // Just for testing purposes
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+           .addMapping("/**")
+           .allowedOrigins("*")
+           .allowedMethods("GET", "POST","PUT", "DELETE");
     }
 }

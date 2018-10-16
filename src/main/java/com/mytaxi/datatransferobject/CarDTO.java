@@ -26,21 +26,21 @@ public class CarDTO {
 
     private EngineType engineType;
 
-
-//    private ManufacturerDO entityManufacturerDO;
+    private ManufacturerDTO manufacturerDTO;
 
 
     private CarDTO() {
     }
 
     private CarDTO(Long id, String licensePlate, Integer seatCount, Boolean convertible,
-                   Integer rating, EngineType engineType) {
+                   Integer rating, EngineType engineType, ManufacturerDTO manufacturerDTO) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.seatCount = seatCount;
         this.convertible = convertible;
         this.rating = rating;
         this.engineType = engineType;
+        this.manufacturerDTO = manufacturerDTO;
     }
 
     @JsonProperty
@@ -68,6 +68,10 @@ public class CarDTO {
         return engineType;
     }
 
+    public ManufacturerDTO getManufacturerDTO() {
+        return manufacturerDTO;
+    }
+
     public static CarDTOBuilder newBuilder() { return new CarDTOBuilder(); }
 
     public static class CarDTOBuilder {
@@ -77,6 +81,7 @@ public class CarDTO {
         private Boolean convertible;
         private Integer rating;
         private EngineType engineType;
+        private ManufacturerDTO manufacturerDTO;
 
         public CarDTOBuilder setId(Long id) {
             this.id = id;
@@ -108,8 +113,13 @@ public class CarDTO {
             return this;
         }
 
+        public CarDTOBuilder setManufacturerDTO(ManufacturerDTO manufacturerDTO) {
+            this.manufacturerDTO = manufacturerDTO;
+            return this;
+        }
+
         public CarDTO createCarDTO() {
-            return new CarDTO(id, licensePlate, seatCount, convertible, rating, engineType);
+            return new CarDTO(id, licensePlate, seatCount, convertible, rating, engineType, manufacturerDTO);
         }
     }
 }

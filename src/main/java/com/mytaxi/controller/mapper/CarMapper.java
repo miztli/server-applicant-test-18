@@ -27,6 +27,12 @@ public class CarMapper {
                     carDTOBuilder.setRating(carDO.getRating());
                 }
 
+                if (carDO.getManufacturerDO() != null) {
+                    carDTOBuilder.setManufacturerDTO(
+                            ManufacturerMapper
+                                    .makeManufacturerDTO(carDO.getManufacturerDO()));
+                }
+
         return carDTOBuilder.createCarDTO();
     }
 

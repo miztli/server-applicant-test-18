@@ -5,6 +5,7 @@ import com.mytaxi.controller.mapper.ManufacturerMapper;
 import com.mytaxi.datatransferobject.CarDTO;
 import com.mytaxi.datatransferobject.ManufacturerDTO;
 import com.mytaxi.domainobject.CarDO;
+import com.mytaxi.exception.BusinessRuleException;
 import com.mytaxi.exception.ConstraintsViolationException;
 import com.mytaxi.exception.EntityNotFoundException;
 import com.mytaxi.service.car.CarService;
@@ -36,18 +37,34 @@ public class CarController {
 
     //Car mappings
 
+    /**
+     * Find all cars
+     * @return The list of @{@link CarDTO}
+     * @throws EntityNotFoundException if no cars found
+     */
     @GetMapping
-    public List<CarDTO> findCars()
-    {
+    public List<CarDTO> findCars() throws EntityNotFoundException {
         return CarMapper.makeCarDTOList(carService.find());
     }
 
+    /**
+     * Get car by id
+     * @param carId
+     * @return The @{@link CarDTO} found
+     * @throws EntityNotFoundException if no car was found
+     */
     @GetMapping("/{carId}")
     public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException
     {
         return CarMapper.makeCarDTO(carService.find(carId));
     }
 
+    /**
+     * Create a car.
+     * @param carDTO
+     * @return The @{@link CarDTO} found
+     * @throws ConstraintsViolationException if the username already exists
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws ConstraintsViolationException
@@ -56,14 +73,27 @@ public class CarController {
         return CarMapper.makeCarDTO(carService.create(carDo));
     }
 
+    /**
+     * Delete a car
+     * @param carId
+     * @throws EntityNotFoundException
+     * @throws BusinessRuleException
+     */
     @DeleteMapping("/{carId}")
-    public void deleteDriver(@PathVariable long carId) throws EntityNotFoundException
-    {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteDriver(@PathVariable long carId) throws EntityNotFoundException, BusinessRuleException {
         carService.delete(carId);
     }
 
     //car-manufacturer mappings
-    @GetMapping("/{carId}/manufacturer")
+
+    /**
+     * Ger car's manufacturer.
+     * @param carId
+     * @return
+     * @throws EntityNotFoundException
+     */
+    @GetMapping("/{carId}/manufacturers")
     public ManufacturerDTO getCarManufacturer(@PathVariable long carId) throws EntityNotFoundException
     {
         return ManufacturerMapper.makeManufacturerDTO(manufacturerService.findCarManufacturer(carId));

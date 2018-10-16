@@ -17,6 +17,9 @@ import static com.mytaxi.util.SecurityContants.AUTHORIZATION_HEADER;
 import static com.mytaxi.util.SecurityContants.SECURE_WORD;
 import static com.mytaxi.util.SecurityContants.TYPE_BEARER;
 
+/**
+ * This class provides JWT Authorization
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {

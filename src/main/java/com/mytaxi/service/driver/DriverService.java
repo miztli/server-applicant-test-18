@@ -16,8 +16,8 @@ public interface DriverService
     //FIND
     DriverDO find(Long driverId) throws EntityNotFoundException;
     List<DriverDO> find(OnlineStatus onlineStatus);
-    List<DriverDO> findAll();
-    List<DriverDO> search(Map<String, Object> filters);
+    List<DriverDO> findAll() throws EntityNotFoundException;
+    List<DriverDO> search(Map<String, Object> filters) throws EntityNotFoundException;
 
     //CREATE
     DriverDO create(DriverDO driverDO) throws ConstraintsViolationException;

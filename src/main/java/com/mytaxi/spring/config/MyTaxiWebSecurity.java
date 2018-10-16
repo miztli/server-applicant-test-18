@@ -4,7 +4,6 @@ import com.mytaxi.web.filters.JWTAuthenticationFilter;
 import com.mytaxi.web.filters.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,10 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+/**
+ * This class sets up the default scurity configuration for the Drivers REST API
+ */
 @EnableWebSecurity
 public class MyTaxiWebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -28,22 +27,7 @@ public class MyTaxiWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
-        String test = enc.encode("password");
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        System.out.println("encoded: " + test);
-        return enc;
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -75,14 +59,5 @@ public class MyTaxiWebSecurity extends WebSecurityConfigurerAdapter {
                 .withUser("miztli")
                 .password("$2a$10$CztggtNTgHAHk/oLHeQtfeuvjVjWIcVb0ezQMkpk0kRtczFekrrlu")
                 .roles("ADMIN");
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**",
-                                             new CorsConfiguration()
-                                                     .applyPermitDefaultValues());
-        return source;
     }
 }
