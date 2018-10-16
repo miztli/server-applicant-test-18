@@ -79,7 +79,7 @@ Manual REST API tests can be performed following the next resources table:
 - ***Miztli Melgoza***
 
 ## Acknowledgments
-- It took me about 6 hours to complete the entire exercise.
+- It took me about 6 - 8 hours to complete the entire exercise.
 - Just a few changes were added to the pre existing code.
 - Although I could have implemented stuff as pagination, ordering, unit and integration tests with spock or a more robust authentication method, I tried to focus on the simplicity and the abstraction of the code to easily accomplish the tasks.
 - If I failed to accomplish a task either by complete or partially, please, let me know in orther to finish it.
