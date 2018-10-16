@@ -105,9 +105,9 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     /**
      * Update the location for a driver.
      *
-     * @param driverId
-     * @param longitude
-     * @param latitude
+     * @param driverId The driver's id
+     * @param longitude The provided latitude
+     * @param latitude The provided longitude
      * @throws EntityNotFoundException
      */
     @Override
@@ -116,6 +116,23 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     {
         DriverDO driverDO = super.findById(driverId);
         driverDO.setCoordinate(new GeoCoordinate(latitude, longitude));
+    }
+
+    /**
+     * Update a driver status.
+     * @param driverId The driver's id
+     * @param onlineStatus The new status
+     * @throws EntityNotFoundException
+     */
+    @Override
+    @Transactional
+    public void updateOnlineStatus(long driverId, OnlineStatus onlineStatus) throws EntityNotFoundException {
+        DriverDO driverDO = super.findById(driverId);
+        // avoid trip to DB if status didn't change
+        if (!driverDO.getOnlineStatus().equals(onlineStatus)) {
+            driverDO.setOnlineStatus(onlineStatus);
+        }
+
     }
 
     /**

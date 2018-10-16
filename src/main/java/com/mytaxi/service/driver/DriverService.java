@@ -27,6 +27,7 @@ public interface DriverService
 
     //UPDATE
     void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException;
+    void updateOnlineStatus(long driverId, OnlineStatus onlineStatus) throws EntityNotFoundException;
     void updateDriverCar(long driverId, long carId, boolean selected) throws EntityNotFoundException, CarAlreadyInUseException, BusinessRuleException;
     void updateDriverPartially(long driverId, Map<String, Object> fields) throws EntityNotFoundException;
 
