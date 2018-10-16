@@ -75,10 +75,10 @@ Manual REST API tests can be performed following the next resources table:
 - [H2](http://www.h2database.com/html/main.html)
 - [JWT](https://github.com/jwtk/jjwt)
 
-##Author
+## Author
 - ***Miztli Melgoza***
 
-##Acknowledgments
+## Acknowledgments
 - It took me about 6 hours to complete the entire exercise.
 - Just a few changes were added to the pre existing code.
 - Although I could have implemented stuff as pagination, ordering, unit and integration tests with spock or a more robust authentication method, I tried to focus on the simplicity and the abstraction of the code to easily accomplish the tasks.
