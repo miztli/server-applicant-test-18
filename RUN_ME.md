@@ -36,14 +36,16 @@ JUNIT + Restassured + maven-failsafe-plugin
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 
-| RESOURCE    | HTTP METHOD | DESCRIPTION              | URL          |  HEADERS |  QUERY PARAMS | BODY   | SUCCESS      | FAILURE             |
-| ----------- | ----------- | ------------------------ | -----------  | -------- | ------------- | -------| ------------ | ------------------- |
-| drivers     | GET         | find all drivers         | /drivers     | -------- | ------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
-| drivers     | GET         | find driver by id        | /drivers/{id}| -------- | ------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
-| drivers     | POST        | create new driver        | /drivers     | -------- | ------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
-|             |             |                          |              |          |               |        |              |                     |
-| drivers     | DELETE      | delete driver by id      | /drivers/{id}| -------- | ------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-| drivers     | PUT         | update a driver location | /drivers/{id}| -------- | ------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| RESOURCE    | HTTP METHOD | DESCRIPTION                     | URL          |  HEADERS |  QUERY PARAMS     | BODY   | SUCCESS      | FAILURE             |
+| ----------- | ----------- | ------------------------------- | -----------  | -------- | ----------------- | -------| ------------ | ------------------- |
+| drivers     | GET         | find all drivers                | /drivers     | -------- | ----------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | GET         | find driver by id               | /drivers/{id}| -------- | ----------------- | ------ | HTTP.OK(200) | HTTP.NOT_FOUND(404) |
+| drivers     | POST        | create new driver               | /drivers     | -------- | ----------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
+|             |             |                                 |              |          |                   |        |              |                     |
+| drivers     | DELETE      | delete driver by id             | /drivers/{id}| -------- | ----------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| drivers     | PUT         | update a driver's location      | /drivers/{id}| -------- | (Float) longitude | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+|             |             |                                 |              |          | (Float) latitude  |        |                      |                     |
+| drivers     | PUT         | update a driver's online status | /drivers/{id}| -------- | ----------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
 
 
 ```
