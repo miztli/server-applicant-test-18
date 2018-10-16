@@ -64,7 +64,7 @@ Manual REST API tests can be performed following the next resources table:
 | cars          | GET             | find car by id                  | /v1/cars/{id}                 | Authorization: Bearer {token} | -------------------------------------------- | { "licensePlate":"MEHM", "convertible":true, "rating":9, "engineType":"HYBRID"} | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | cars          | POST            | create new driver               | /v1/cars                      | Authorization: Bearer {token} | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
 | cars          | DELETE          | delete car by id                | /v1/cars/{id}                 | Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
-| manufacturers | GET             | find a car's manufacturer       | /v1/cars/{carId}/manufacturers| Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |
+| manufacturers | GET             | find a car's manufacturer       | /v1/cars/{carId}/manufacturers| Authorization: Bearer {token} | -------------------------------------------- | ---- - | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 
 ## Built with
 - [Springboot](https://spring.io/projects/spring-boot)
