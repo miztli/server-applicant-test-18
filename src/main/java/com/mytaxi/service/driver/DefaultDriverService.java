@@ -237,11 +237,6 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
     @Transactional
     public List<DriverDO> search(Map<String, Object> filters) throws EntityNotFoundException {
         List<DriverDO> drivers = super.findAll(DriverSpecifications.withFilters(filters)); // To access exception
-        drivers.forEach(d -> {
-            //load inner entities
-            CarDO carDO = d.getCarDO();
-            if (carDO != null) { carDO.getManufacturerDO(); }
-        });
         return drivers;
     }
 

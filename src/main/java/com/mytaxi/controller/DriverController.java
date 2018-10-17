@@ -227,7 +227,7 @@ public class DriverController
             if (convertible != null) { filters.put(FilterNames.FIELD_CONVERTIBLE, convertible); }
             if (manufacturerName != null) { filters.put(FilterNames.FIELD_MANUFACTURER_NAME, manufacturerName); }
 
-        return DriverMapper.makeDriverDTOList(driverService.search(filters));
+        return DriverMapper.makeFullDriverDTOList(driverService.search(filters));
     }
 
     // CAR MAPPINGS

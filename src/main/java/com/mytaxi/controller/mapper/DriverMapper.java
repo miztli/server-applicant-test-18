@@ -34,6 +34,9 @@ public class DriverMapper
         {
             driverDTOBuilder.setOnlineStatus(onlineStatus);
         }
+//        if (driverDO.getCarDO() != null) {
+//            driverDTOBuilder.setCarDTO(CarMapper.makeFullCarDTO(driverDO.getCarDO()));
+//        }
 
         return driverDTOBuilder.createDriverDTO();
     }
