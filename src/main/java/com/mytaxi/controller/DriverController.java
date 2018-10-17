@@ -235,6 +235,6 @@ public class DriverController
     @GetMapping("/{driverId}/car")
     public CarDTO getDriverCar(@PathVariable long driverId) throws EntityNotFoundException
     {
-        return CarMapper.makeCarDTO(carService.findByDriverId(driverId));
+        return CarMapper.makeFullCarDTO(carService.findByDriverId(driverId));
     }
 }

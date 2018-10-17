@@ -35,11 +35,14 @@ JUNIT + Restassured + maven-failsafe-plugin
     ```java -jar target/mytaxi_server_applicant_test-1.0.0-SNAPSHOT.jar```
 
     ```mvn spring-boot:run```
-    
+
+App will start in http://localhost:8080
+
 ## Resource location
 Manual REST API tests can be performed following the next resources table:
 
 *Credentials:* ```username=miztli password=password```
+*NOTE:* Authentication must be done using the login method. The response will contain the Authorization: Bearer {token} header, which will need to be included as Authentication header for subsequent requests.
 
 * *By default we use only JSON media types*
 
@@ -49,7 +52,7 @@ Manual REST API tests can be performed following the next resources table:
 | login         | POST            | authenticate user (30 min)      | /login                        | ----------------------------- | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find all drivers                | /v1/drivers                   | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | GET             | find driver by id               | /v1/drivers/{id}              | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
-| drivers       | GET             | find driver by onlineStatus     | /v1/drivers/{id}              | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
+| drivers       | GET             | find driver by onlineStatus     | /v1/drivers                   | Authorization: Bearer {token} | (String) onlineStatus={ONLINE, OFFLINE}      | ------ | HTTP.OK(200)         | HTTP.NOT_FOUND(404) |
 | drivers       | POST            | create new driver               | /v1/drivers                   | Authorization: Bearer {token} | -------------------------------------------- | {"username":"Miztli Melgoza", "password":"abcd1234"} | HTTP.CREATED(201) | HTTP.CONFLICT(409) |
 |               |                 |                                 |                               |                               |                                              |                          |              |                     |
 | drivers       | DELETE          | delete driver by id             | /v1/drivers/{id}              | Authorization: Bearer {token} | -------------------------------------------- | ------ | HTTP.NO_CONTENT(204) | HTTP.NOT_FOUND(404) |

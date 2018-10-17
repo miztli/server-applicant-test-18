@@ -8,7 +8,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Database Access Object for driver table.
@@ -23,7 +25,13 @@ import org.springframework.data.repository.CrudRepository;
 public interface DriverRepository extends JpaRepository<DriverDO, Long>,
                                           JpaSpecificationExecutor<DriverDO>
 {
+    /*Avoids join for better performance*/
+    @Query("select d from DriverDO d where d.deleted = :deleted")
+    List<DriverDO> findByNoDeleted(@Param("deleted") boolean isDeleted);
+
     Optional<DriverDO> findByCarDO(CarDO carDO);
+
     List<DriverDO> findByOnlineStatus(OnlineStatus onlineStatus);
+
     Optional<DriverDO> findByIdAndOnlineStatus(long id, OnlineStatus onlineStatus);
 }

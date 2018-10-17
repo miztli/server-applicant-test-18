@@ -30,7 +30,8 @@ public class DefaultManufacturerService extends AbstractService<ManufacturerDO, 
                         .findById(carId)
                         .orElseThrow(()->new EntityNotFoundException("No car found with id: " + carId));
         if (carDO.getManufacturerDO()!=null) {
-            return carDO.getManufacturerDO();
+            ManufacturerDO manufacturerDTO = carDO.getManufacturerDO();
+            return manufacturerDTO;
         }
         else {
             throw new EntityNotFoundException("No manufacturer found for car with id: " + carId);

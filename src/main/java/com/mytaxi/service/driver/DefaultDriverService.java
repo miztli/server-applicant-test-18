@@ -30,6 +30,7 @@ import java.util.Optional;
  * <p/>
  */
 @Service
+@Transactional
 public class DefaultDriverService extends AbstractService<DriverDO, Long> implements DriverService
 {
 
@@ -214,6 +215,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
      * @return The List of drivers.
      */
     @Override
+    @Transactional(readOnly = true)
     public List<DriverDO> findAll() throws EntityNotFoundException {
         return super.findAll(DriverSpecifications.findNotDeleted());
     }
@@ -232,6 +234,7 @@ public class DefaultDriverService extends AbstractService<DriverDO, Long> implem
      * @return The list of matching users
      */
     @Override
+    @Transactional
     public List<DriverDO> search(Map<String, Object> filters) throws EntityNotFoundException {
         List<DriverDO> drivers = super.findAll(DriverSpecifications.withFilters(filters)); // To access exception
         drivers.forEach(d -> {

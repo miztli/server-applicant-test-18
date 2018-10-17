@@ -38,6 +38,7 @@ public class DefaultCarService extends AbstractService<CarDO, Long> implements C
      * @throws EntityNotFoundException if no cars found
      */
     @Override
+    @Transactional(readOnly = true)
     public List<CarDO> find() throws EntityNotFoundException {
         return super.findAll();
     }
@@ -73,6 +74,7 @@ public class DefaultCarService extends AbstractService<CarDO, Long> implements C
      * @throws ConstraintsViolationException if some db constraints were violated
      */
     @Override
+    @Transactional
     public CarDO create(CarDO carDO) throws ConstraintsViolationException {
         return super.save(carDO);
     }
@@ -84,6 +86,7 @@ public class DefaultCarService extends AbstractService<CarDO, Long> implements C
      * @throws BusinessRuleException if the car is assigned currently to a driver
      */
     @Override
+    @Transactional
     public void delete(Long id) throws EntityNotFoundException, BusinessRuleException {
         CarDO carDO = super.findById(id);
         //validate if is not assigned to a driver
