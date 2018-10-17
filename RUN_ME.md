@@ -93,6 +93,6 @@ Manual REST API tests can be performed following the next resources table:
 - Just a few changes were added to the pre existing code.
 - TDD was more or less achieved due to the fact that there was already existing working code.
 - Although I could have implemented stuff as pagination, ordering, unit and integration tests with spock or a more robust authentication method, I tried to focus on the simplicity and the abstraction of the code to easily accomplish the tasks.
-- If I failed to accomplish a task either completely or partially, please, let me know in orther to finish it (if possible).
+- If I failed to accomplish a task either completely or partially, please, let me know in order to finish it (if possible).
 
 ***Kind, regards.***
