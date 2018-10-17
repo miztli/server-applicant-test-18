@@ -3,7 +3,6 @@ package com.mytaxi.service.manufacturer;
 import com.mytaxi.dataaccessobject.CarRepository;
 import com.mytaxi.dataaccessobject.ManufacturerRepository;
 import com.mytaxi.dataaccessobject.specifications.CarSpecifications;
-import com.mytaxi.domainobject.CarDO;
 import com.mytaxi.domainobject.ManufacturerDO;
 import com.mytaxi.exception.EntityNotFoundException;
 import com.mytaxi.service.AbstractService;
@@ -31,16 +30,6 @@ public class DefaultManufacturerService extends AbstractService<ManufacturerDO, 
                     .findOne(CarSpecifications.findByCarId(carId))
                     .orElseThrow(() -> new EntityNotFoundException("No car found with id: " + carId))
                     .getManufacturerDO();
-//        CarDO carDO = carRepository
-//                        .findById(carId)
-//                        .orElseThrow(()-> throw new EntityNotFoundException("No car found with id: " + carId));
-//        if (carDO.getManufacturerDO()!=null) {
-//            ManufacturerDO manufacturerDTO = carDO.getManufacturerDO();
-//            return manufacturerDTO;
-//        }
-//        else {
-//            throw new EntityNotFoundException("No manufacturer found for car with id: " + carId);
-//        }
     }
 
     @Override

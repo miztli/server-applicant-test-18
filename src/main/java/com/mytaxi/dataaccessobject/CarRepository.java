@@ -1,10 +1,8 @@
 package com.mytaxi.dataaccessobject;
 
 import com.mytaxi.domainobject.CarDO;
-import com.mytaxi.domainobject.DriverDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * Database Access Object for {@link CarDO} entities table.
@@ -15,7 +13,5 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface CarRepository extends JpaRepository<CarDO, Long>,
                                        JpaSpecificationExecutor<CarDO> {
-//    CarDO findByDriverDO(DriverDO driverDO);
-//    @Query("select c, d from CarDO c left outer join DriverDO d on c.id = d.carDO.id where d.id = ?1")
-//    CarDO findByDriverId(Long id);
+
 }
