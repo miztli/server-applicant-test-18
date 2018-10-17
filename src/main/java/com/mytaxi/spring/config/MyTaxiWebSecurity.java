@@ -38,7 +38,10 @@ public class MyTaxiWebSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                     .csrf().disable() // disable CSRF
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/login") //disable security for login
+                    .antMatchers( "/swagger**", "/v2/api-docs**").permitAll()
+                .and()//disable security for login
+                .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/login")
                     .permitAll()
                 .anyRequest() //every other request mus be authenticated
                     .authenticated()
